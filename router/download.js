@@ -2,7 +2,7 @@ const EXPRESS=require('express')
 const router=EXPRESS.Router()
 var fs = require('fs');//引用文件系统模块
 
-app.get("/download",async function(req,res){
+app.get("/download",(req, res)=>{
     //console.log(req.query['filename'])
 
       fs.exists("../done/"+req.query['filename'],function(exists){
