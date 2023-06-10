@@ -1,6 +1,8 @@
 const EXPRESS=require('express')
 const app=EXPRESS()
 const fs = require('fs');//引用文件系统模块
+var expressWs = require('express-ws');
+expressWs(app);
 const listStoryR=require("./router/listStory")
 const listAnnR=require("./router/announcementList")
 const forumList=require("./router/forumList")
@@ -13,6 +15,8 @@ const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
 console.log(__dirname);
+
+
 //中间件配置
 //适应Post请求
 app.use(EXPRESS.json())
