@@ -1,5 +1,6 @@
 const EXPRESS=require('express')
 const router=EXPRESS.Router()
+const multer = require('multer')
 
 var fs = require('fs');//引用文件系统模块
 
