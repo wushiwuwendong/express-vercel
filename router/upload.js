@@ -31,7 +31,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       await hqtp();
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
-      console.log(await sbtable(imggg));
+      var table=await sbtable(imggg);
       // 构造响应数据
       const response = {
         status: 200,
@@ -40,7 +40,8 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
         size: size,
         path: path,
         uplaodstatus:await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true),
-        baidutoken:baidutoken
+        baidutoken:baidutoken,
+        table:table
 
       };
       res.json(response);
