@@ -91,6 +91,18 @@ app.get("/",(req, res)=>{
     `)
 })
 
-app.listen(3001,()=>{
-    console.log('服务器启动成功1')
-})
+async function startServer() {
+    try {
+      await hqtp();
+      // 中间件配置和路由代码
+      // ...
+    
+      app.listen(3001, () => {
+        console.log('服务器启动成功');
+      });
+    } catch (error) {
+      console.error('启动服务器失败:', error);
+    }
+  }
+  
+  startServer();
