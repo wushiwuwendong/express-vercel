@@ -37,7 +37,8 @@ router.post("/upload",upload.single("image"),(req,res)=>{
         filename: originalname,
         size: size,
         path: path,
-        list: client.getDirectoryContents("/ghost/hxj/upload")
+        list: client.getDirectoryContents("/ghost/hxj/upload"),
+        uplaodstatus: client.putFileContents(`/ghost/hxj/upload/${originalname}`, fs.createReadStream(path))
       };
       res.json(response);
       // 将响应数据以 JSON 格式返回
