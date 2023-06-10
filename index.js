@@ -14,7 +14,7 @@ const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
-
+var baidutoken = require("./datastore").baidutoken;
 console.log(__dirname);
 
 function hqtp() {
