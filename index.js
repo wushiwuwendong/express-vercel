@@ -38,12 +38,15 @@ app.use("/",Upload)
 app.use((err, req, res, next) => {
     // 设置错误状态码，默认为 500 内部服务器错误
     const statusCode = err.statusCode || 500;
-  
+    const path = require('path');
+    
+    const uploadFolderPath = path.join(process.cwd(), 'upload');
     // 构造错误响应对象
     const errorResponse = {
       status: statusCode,
       message: err.message,
-      stack: err.stack // 堆栈跟踪信息（仅用于开发环境，生产环境应该禁用）
+      stack: err.stack, // 堆栈跟踪信息（仅用于开发环境，生产环境应该禁用）
+      path: uploadFolderPath 
     };
   
     // 将错误信息以 JSON 格式返回
