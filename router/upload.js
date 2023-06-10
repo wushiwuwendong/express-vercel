@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
     }*/
   })
 const upload = multer({ storage: storage })
-router.post("/upload",upload.single("image"),(req,res)=>{
+router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
@@ -37,7 +37,7 @@ router.post("/upload",upload.single("image"),(req,res)=>{
         filename: originalname,
         size: size,
         path: path,
-        list: client.getDirectoryContents("/ghost/hxj/upload"),
+        list: await client.getDirectoryContents("/ghost/hxj/upload"),
         uplaodstatus: client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path)),
         stream:fs.readFileSync(path)
       };
