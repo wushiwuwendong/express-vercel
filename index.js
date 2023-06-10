@@ -18,7 +18,7 @@ var baidutoken = require("./datastore").baidutoken;
 console.log(__dirname);
 
 function hqtp() {
-    return new Promise((resolve, reject) => {
+    
       var request = require('request');
       request.get(
         {
@@ -29,15 +29,15 @@ function hqtp() {
           if (response.statusCode == 200) {
             console.log("获取百度token" + JSON.parse(body)['access_token']);
             baidutoken=JSON.parse(body)['access_token'];
-            resolve(JSON.parse(body)['access_token']);
+           
           } else {
-            reject(new Error("获取百度token失败"));
+           
           }
         }
       );
-    });
+
   }
-  await hqtp()
+hqtp()
 //中间件配置
 //适应Post请求
 app.use(EXPRESS.json())
@@ -91,18 +91,6 @@ app.get("/",(req, res)=>{
     `)
 })
 
-async function startServer() {
-    try {
-      await hqtp();
-      // 中间件配置和路由代码
-      // ...
-    
-      app.listen(3001, () => {
-        console.log('服务器启动成功');
-      });
-    } catch (error) {
-      console.error('启动服务器失败:', error);
-    }
-  }
-  
-  startServer();
+app.listen(3001,()=>{
+    console.log('服务器启动成功1')
+})
