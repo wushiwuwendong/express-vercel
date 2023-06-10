@@ -28,7 +28,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
-      await hqtp();
+       hqtp();
       // 构造响应数据
       const response = {
         status: 200,
@@ -49,7 +49,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
   
  
 })
-async function hqtp(){
+ function hqtp(){
   var request = require('request');
   request.get(
       {
@@ -62,7 +62,7 @@ async function hqtp(){
               baidutoken=JSON.parse(body)['access_token'];
               return 1;
           }else{
-              console.log(response.statusCode);
+            
           }
       }
   );
