@@ -7,7 +7,7 @@ app.get("/download",async function(req,res){
     queue.add(function () {
       fs.exists("../done/"+req.query['filename'],function(exists){
         if(exists){
-            res.download("/root/jspdfcode/done/"+req.query['filename'])
+            res.download("../done/"+req.query['filename'])
             return
         }else{
             res.json({status: "404", message: '文件不存在'})

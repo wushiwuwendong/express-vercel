@@ -9,7 +9,7 @@ const novelDetail=require("./router/novelDetail")
 const userInfo=require("./router/userInfo")
 const image=require("./router/image")
 const Login=require("./router/login")
-const download=require("./router/login")
+const Download=require("./router/download")
 
 //中间件配置
 //适应Post请求
@@ -29,12 +29,14 @@ app.use("/",userInfo)
 app.use("/",novelDetail)
 app.use("/",image)
 app.use("/",Login)
+app.use("/",Download)
 
 app.get("/",(req, res)=>{
     res.send(`<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
                     <h1>欢迎使用华熙佳发货api</h1>
                     <div>post-llist</div>
                     <ul style="list-style: none;padding-left: 0;">
+                        <li><a href="https://express-vercel-ruby.vercel.app/download">/download</a></li>
                         <li><a href="https://express-vercel-ruby.vercel.app/forumList">/forumList</a></li>
                         <li><a href="https://express-vercel-ruby.vercel.app/listStory">/listStory</a></li>
                         <li><a href="https://express-vercel-ruby.vercel.app//novelView">/novelView</a></li>
