@@ -9,6 +9,7 @@ const novelDetail=require("./router/novelDetail")
 const userInfo=require("./router/userInfo")
 const image=require("./router/image")
 const Login=require("./router/login")
+const download=require("./router/login")
 
 //中间件配置
 //适应Post请求
