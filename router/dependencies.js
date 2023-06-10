@@ -14,7 +14,6 @@ router.get('/dependencies/list', (req, res) => {
     });
   });
   router.get('/dependencies/dir', (req, res) => {
-    const { exec } = require('child_process');
     res.json({dir:__dirname});
   });
 module.exports=router
