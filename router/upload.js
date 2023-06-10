@@ -17,9 +17,20 @@ const storage = multer.diskStorage({
   })
 const upload = multer({ storage: storage })
 router.post("/upload",upload.single("image"),(req,res)=>{
-    console.log(req.file)
-    //console.log(typeof(req.file))
-    res.json({status: "200", message: '收到图片1'})
+    // 获取保存的图片信息
+  const { filename, size, path } = req.file;
+
+  // 构造响应数据
+  const response = {
+    status: 200,
+    message: "收到图片",
+    filename: filename,
+    size: size,
+    path: path
+  };
+
+  // 将响应数据以 JSON 格式返回
+  res.json(response);
 })
 
 module.exports=router
