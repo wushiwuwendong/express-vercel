@@ -1,6 +1,6 @@
 const EXPRESS=require('express')
 const app=EXPRESS()
-
+const fs = require('fs');//引用文件系统模块
 const listStoryR=require("./router/listStory")
 const listAnnR=require("./router/announcementList")
 const forumList=require("./router/forumList")
@@ -9,7 +9,7 @@ const novelDetail=require("./router/novelDetail")
 const userInfo=require("./router/userInfo")
 const image=require("./router/image")
 const Login=require("./router/login")
-
+const Download=require("./router/download")
 
 //中间件配置
 //适应Post请求
@@ -29,7 +29,7 @@ app.use("/",userInfo)
 app.use("/",novelDetail)
 app.use("/",image)
 app.use("/",Login)
-
+app.use("/",Download)
 
 app.get("/",(req, res)=>{
     res.send(`<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
