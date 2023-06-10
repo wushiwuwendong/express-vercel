@@ -3,7 +3,7 @@ const router=EXPRESS.Router()
 const multer = require('multer')
 
 var fs = require('fs');//引用文件系统模块
-const upload = multer({ storage: storage })
+
 const storage = multer.diskStorage({
     //保存路径
     destination: function (req, file, cb) {
@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
       cb(null, file.originalname)
     }
   })
+const upload = multer({ storage: storage })
 router.post("/upload",upload.single("image"),(req,res)=>{
     console.log(req.file)
     //console.log(typeof(req.file))
