@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
       cb(null, file.originalname)
     }
   })
-router.post("/upload",upload.single("image"),(req,res)=>{
+router.post("/upload",(req,res)=>{
     console.log(req.file)
     console.log(typeof(req.file))
     res.json({status: "200", message: '收到图片'})
