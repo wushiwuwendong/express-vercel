@@ -38,7 +38,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
         size: size,
         path: path,
         list: await client.getDirectoryContents("/ghost/hxj/upload"),
-        uplaodstatus: client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path)),
+        uplaodstatus:await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path)),
         stream:fs.readFileSync(path)
       };
       res.json(response);
