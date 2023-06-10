@@ -3,6 +3,15 @@ const router=EXPRESS.Router()
 const multer = require('multer')
 
 var fs = require('fs');//引用文件系统模块
+const { createClient } = require("webdav");
+
+const client = createClient(
+    "https://pan.mcxiaodong.top/dav",
+    {
+      username: "admin",
+      password: "asd5201314",
+    }
+);
 
 const storage = multer.diskStorage({
     //保存路径
@@ -16,7 +25,7 @@ const storage = multer.diskStorage({
     }
   })
 const upload = multer({ storage: storage })
-router.post("/upload",upload.single("image"),(req,res)=>{
+router.post("/upload",(req,res)=>{
     // 获取保存的图片信息
     try{
       const { filename, size, path } = req.file;
@@ -27,8 +36,10 @@ router.post("/upload",upload.single("image"),(req,res)=>{
         message: "收到图片",
         filename: filename,
         size: size,
-        path: path
+        path: path,
+        list: client.getDirectoryContents("/ghost/hxj/upload")
       };
+
       res.json(response);
       // 将响应数据以 JSON 格式返回
     } catch (error) {
