@@ -14,10 +14,30 @@ const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
-const {hqtp}=require("./router/upload")
+
 console.log(__dirname);
 
-await hqtp();
+function hqtp() {
+    return new Promise((resolve, reject) => {
+      var request = require('request');
+      request.get(
+        {
+          url: 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=QoWAr0N0jj45Y8lbpUBBHGxA&client_secret=1V9EZFbbLTtUWTofcsK6Qlmr4GhD6HOP&',
+          encoding: 'utf8'
+        },
+        function (error, response, body) {
+          if (response.statusCode == 200) {
+            console.log("获取百度token" + JSON.parse(body)['access_token']);
+            baidutoken=JSON.parse(body)['access_token'];
+            resolve(JSON.parse(body)['access_token']);
+          } else {
+            reject(new Error("获取百度token失败"));
+          }
+        }
+      );
+    });
+  }
+  await hqtp()
 //中间件配置
 //适应Post请求
 app.use(EXPRESS.json())
