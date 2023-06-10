@@ -1,5 +1,6 @@
 const EXPRESS=require('express')
 const router=EXPRESS.Router()
+var fs = require('fs');//引用文件系统模块
 var Queue = require('promise-queue')
 var maxConcurrent = 4;
 var maxQueue = Infinity;
