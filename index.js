@@ -17,27 +17,7 @@ const Upload=require("./router/upload")
 var baidutoken = require("./datastore").baidutoken;
 console.log(__dirname);
 
-function hqtp() {
-    
-      var request = require('request');
-      request.get(
-        {
-          url: 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=QoWAr0N0jj45Y8lbpUBBHGxA&client_secret=1V9EZFbbLTtUWTofcsK6Qlmr4GhD6HOP&',
-          encoding: 'utf8'
-        },
-        function (error, response, body) {
-          if (response.statusCode == 200) {
-            console.log("获取百度token" + JSON.parse(body)['access_token']);
-            baidutoken=JSON.parse(body)['access_token'];
-           
-          } else {
-           
-          }
-        }
-      );
 
-  }
-hqtp()
 //中间件配置
 //适应Post请求
 app.use(EXPRESS.json())
