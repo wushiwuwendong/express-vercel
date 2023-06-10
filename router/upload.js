@@ -28,7 +28,13 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
-      const token = await hqtp();
+      await hqtp();
+      var files = fs.readFileSync(path);
+      var imggg=new Buffer(files).toString('base64');
+      sbtable(imggg).then((data1)=>{
+       // res.json({status:"200",type:"识别图片",message:"识别成功",result:data1})
+       console.log(data1);
+      })
       // 构造响应数据
       const response = {
         status: 200,
@@ -69,5 +75,21 @@ function hqtp() {
     );
   });
 }
+function sbtable(url,s) {
+  var request = require('request');
+  let options = {
+      url: url,
+      form:{image:s},
+  };
 
+  return new Promise(function (resolve, reject) {
+      request.post(options, function (error, response, body) {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(body);
+          }
+      });
+  });
+}
 module.exports=router
