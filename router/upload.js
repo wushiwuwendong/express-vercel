@@ -28,7 +28,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
-      //hqtp();
+      await hqtp();
       // 构造响应数据
       const response = {
         status: 200,
@@ -36,7 +36,6 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
         filename: originalname,
         size: size,
         path: path,
-        list: await client.getDirectoryContents("/ghost/hxj/upload"),
         uplaodstatus:await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path)),
         baidutoken:baidutoken
 
@@ -50,7 +49,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
   
  
 })
-function hqtp(){
+async function hqtp(){
   var request = require('request');
   request.get(
       {
