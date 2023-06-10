@@ -1,6 +1,7 @@
 const EXPRESS=require('express')
 const router=EXPRESS.Router()
-
+var Queue = require('promise-queue')
+var queue = new Queue(maxConcurrent,maxQueue);
 app.get("/download",async function(req,res){
     //console.log(req.query['filename'])
     queue.add(function () {
