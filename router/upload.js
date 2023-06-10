@@ -28,7 +28,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
-      hqtp();
+      //hqtp();
       // 构造响应数据
       const response = {
         status: 200,
