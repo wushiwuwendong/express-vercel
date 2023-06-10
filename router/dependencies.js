@@ -1,6 +1,6 @@
 const EXPRESS=require('express')
 const router=EXPRESS.Router()
-router.get('/dependencies', (req, res) => {
+router.get('/dependencies/list', (req, res) => {
     const { exec } = require('child_process');
     
     exec('npm ls --json', (error, stdout, stderr) => {
@@ -13,4 +13,9 @@ router.get('/dependencies', (req, res) => {
       res.json(dependencies);
     });
   });
+  router.get('/dependencies/dir', (req, res) => {
+
+            res.status(200).json({ msg: __dirname });
+  
+    });
 module.exports=router
