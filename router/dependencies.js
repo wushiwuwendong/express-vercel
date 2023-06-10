@@ -5,7 +5,7 @@ router.get('/dependencies', (req, res) => {
     
     exec('npm ls --json', (error, stdout, stderr) => {
         if (error) {
-            res.status(500).json({ error: error.message, stdout:stdout, sterr:stderr });
+            res.status(500).json({ error: error.message, stdout:stdout.message, sterr:stderr.message });
             return;
           }
       
