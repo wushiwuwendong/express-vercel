@@ -75,7 +75,7 @@ function hqtp() {
 function sbtable(url,s) {
   var request = require('request');
   let options = {
-      url: url,
+      url: "https://aip.baidubce.com/rest/2.0/ocr/v1/table?access_token="+baidutoken,
       form:{image:s},
   };
 
