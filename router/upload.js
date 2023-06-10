@@ -14,18 +14,10 @@ const client = createClient(
 );
 
 const storage = multer.diskStorage({
-    //保存路径
-    destination: function (req, file, cb) {
-      cb(null, '/var/task/upload')
-      //注意这里的文件路径,不是相对路径，直接填写从项目根路径开始写就行了
-    },
-    //保存在 destination 中的文件名
-    filename: function (req, file, cb) {    
-      cb(null, file.originalname)
-    }
+
   })
 const upload = multer({ storage: storage })
-router.post("/upload",(req,res)=>{
+router.post("/upload",upload.single("image"),(req,res)=>{
     // 获取保存的图片信息
     try{
       const { filename, size, path } = req.file;
@@ -39,7 +31,6 @@ router.post("/upload",(req,res)=>{
         path: path,
         list: client.getDirectoryContents("/ghost/hxj/upload")
       };
-
       res.json(response);
       // 将响应数据以 JSON 格式返回
     } catch (error) {
