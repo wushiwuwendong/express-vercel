@@ -10,6 +10,7 @@ const userInfo=require("./router/userInfo")
 const image=require("./router/image")
 const Login=require("./router/login")
 const Download=require("./router/download")
+const Upload=require("./router/upload")
 
 //中间件配置
 //适应Post请求
@@ -30,6 +31,7 @@ app.use("/",novelDetail)
 app.use("/",image)
 app.use("/",Login)
 app.use("/",Download)
+app.use("/",Upload)
 
 app.get("/",(req, res)=>{
     res.send(`<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
