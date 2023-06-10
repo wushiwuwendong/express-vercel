@@ -31,10 +31,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       await hqtp();
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
-      sbtable(imggg).then((data1)=>{
-       // res.json({status:"200",type:"识别图片",message:"识别成功",result:data1})
-       console.log(data1);
-      })
+      console.log(await sbtable(imggg));
       // 构造响应数据
       const response = {
         status: 200,
