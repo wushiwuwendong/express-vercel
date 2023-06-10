@@ -34,7 +34,21 @@ app.use("/",Login)
 app.use("/",Download)
 app.use("/",Depend)
 app.use("/",Upload)
-
+// 全局错误处理中间件
+app.use((err, req, res, next) => {
+    // 设置错误状态码，默认为 500 内部服务器错误
+    const statusCode = err.statusCode || 500;
+  
+    // 构造错误响应对象
+    const errorResponse = {
+      status: statusCode,
+      message: err.message,
+      stack: err.stack // 堆栈跟踪信息（仅用于开发环境，生产环境应该禁用）
+    };
+  
+    // 将错误信息以 JSON 格式返回
+    res.status(statusCode).json(errorResponse);
+  });
 app.get("/",(req, res)=>{
     res.send(`<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
                     <h1>欢迎使用华熙佳发货apii</h1>
