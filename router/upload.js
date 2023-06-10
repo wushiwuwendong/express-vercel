@@ -1,10 +1,9 @@
 const EXPRESS=require('express')
 const router=EXPRESS.Router()
 const multer = require('multer')
-
+const {baidutoken}=require("./datastore")
 var fs = require('fs');//引用文件系统模块
 const { createClient } = require("webdav");
-
 const client = createClient(
     "https://pan.mcxiaodong.top/dav",
     {
@@ -29,7 +28,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
-
+      hqtp();
       // 构造响应数据
       const response = {
         status: 200,
@@ -39,7 +38,8 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
         path: path,
         list: await client.getDirectoryContents("/ghost/hxj/upload"),
         uplaodstatus:await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path)),
-        stream:fs.readFileSync(path)
+        baidutoken:baidutoken
+
       };
       res.json(response);
       // 将响应数据以 JSON 格式返回
@@ -50,5 +50,22 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
   
  
 })
-
+function hqtp(){
+  var request = require('request');
+  request.get(
+      {
+          url:'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=QoWAr0N0jj45Y8lbpUBBHGxA&client_secret=1V9EZFbbLTtUWTofcsK6Qlmr4GhD6HOP&',
+          encoding:'utf8'
+      },
+      function(error, response, body){
+          if(response.statusCode == 200){
+              console.log("获取百度token"+JSON.parse(body)['access_token']);
+              baidutoken=JSON.parse(body)['access_token'];
+              return 1;
+          }else{
+              console.log(response.statusCode);
+          }
+      }
+  );
+}
 module.exports=router
