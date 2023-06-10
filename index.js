@@ -31,7 +31,7 @@ app.use("/",Login)
 
 app.get("/",(req, res)=>{
     res.send(`<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
-                    <h1>welcome this project</h1>
+                    <h1>欢迎使用华熙佳发货api</h1>
                     <div>post-llist</div>
                     <ul style="list-style: none;padding-left: 0;">
                         <li><a href="https://express-vercel-ruby.vercel.app/forumList">/forumList</a></li>
