@@ -14,9 +14,10 @@ const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
+const {hqtp}=require("./router/upload")
 console.log(__dirname);
 
-
+await hqtp();
 //中间件配置
 //适应Post请求
 app.use(EXPRESS.json())

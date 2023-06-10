@@ -28,7 +28,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
       const { originalname,filename, size, path } = req.file;
-      await hqtp();
+      
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
       var table=await sbtable(imggg);
