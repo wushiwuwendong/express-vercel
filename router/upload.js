@@ -79,7 +79,7 @@ function sbtable(url,s) {
       url: "https://aip.baidubce.com/rest/2.0/ocr/v1/table?access_token="+baidutoken,
       form:{image:s},
   };
-
+  console.log(options);
   return new Promise(function (resolve, reject) {
       request.post(options, function (error, response, body) {
           if (error) {
