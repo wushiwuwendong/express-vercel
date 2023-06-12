@@ -74,7 +74,12 @@ app.get("/",(req, res)=>{
                     </div>
     `)
 })
-
+app.ws('/upload', function (ws, req){
+    ws.send("连接成功")
+    ws.on('message', function (msg) {
+    console.log(msg)
+    })
+})
 app.listen(3001,()=>{
     console.log('服务器启动成功1')
 })
