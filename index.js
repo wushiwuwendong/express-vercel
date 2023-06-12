@@ -80,6 +80,10 @@ app.ws('/upload', function (ws, req){
     console.log(msg)
     })
 })
-app.listen(3001,()=>{
-    console.log('服务器启动成功1')
+
+var server=app.listen('3001',function(){
+    var host = server.address().address;
+    var port = server.address().port;
+    //hqtp()
+    console.log('服务器开启在 http://%s:%s', host, port);
 })
