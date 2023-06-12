@@ -14,6 +14,23 @@ const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
+
+
+const Pusher = require("pusher");
+
+const pusher = new Pusher({
+  appId: "1616885",
+  key: "82c3a115672d9387be63",
+  secret: "797daf2c93986300b947",
+  cluster: "ap1",
+  useTLS: true
+});
+
+pusher.trigger("my-channel", "my-event", {
+  message: "hello world"
+});
+
+
 console.log(__dirname);
 //中间件配置
 //适应Post请求
