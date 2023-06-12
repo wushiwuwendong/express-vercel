@@ -35,9 +35,10 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       if(!isJSON(table)){
         table=JSON.parse(table);
       }
+      const response={}
       // 构造响应数据
       try{
-        const response = {
+         response = {
           status: 200,
           message: "收到图片",
           filename: originalname,
@@ -49,7 +50,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
   
         };
       }catch{
-        const response = {
+         response = {
           status: 200,
           message: "收到图片",
           filename: originalname,
