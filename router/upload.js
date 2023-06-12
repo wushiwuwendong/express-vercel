@@ -32,6 +32,9 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
       var table=await sbtable(imggg);
+      if(!isJSON(table)){
+        table=JSON.parse(table);
+      }
       // 构造响应数据
       const response = {
         status: 200,
@@ -53,6 +56,20 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
   
  
 })
+
+function isJSON(variable) {
+  if (typeof variable === 'string') {
+    try {
+      JSON.parse(variable);
+      return true; // 变量是JSON格式
+    } catch (error) {
+      return false; // 变量是字符串
+    }
+  } else {
+    return false; // 变量不是字符串
+  }
+}
+
 function hqtp() {
   return new Promise((resolve, reject) => {
     var request = require('request');
