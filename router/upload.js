@@ -32,13 +32,11 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
       var table=await sbtable(imggg);
-      if(!isJSON(table)){
-        table=JSON.parse(table);
-      }
-      const response={}
+   
+    
       // 构造响应数据
    
-         response = {
+      const response = {
           status: 200,
           message: "收到图片",
           filename: originalname,
