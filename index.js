@@ -107,6 +107,7 @@ app.post("/pusher/user-auth", (req, res) => {
       id: socketId,
       user_info: {
         name: "personal"+userinfo.length,
+        ip: ipAddress,
       },
       watchlist: ['another_id_1', 'another_id_2']
     };
