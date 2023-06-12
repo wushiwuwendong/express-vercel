@@ -31,6 +31,7 @@ app.all('*', function(req, res, next) {
     //res.header("Content-Type", "application/json;charset=utf-8");
     next();
   });
+
 //路由中间件
 app.use("/",listStoryR)
 app.use("/",listAnnR)
@@ -74,13 +75,15 @@ app.get("/",(req, res)=>{
                     </div>
     `)
 })
+app.get("/info",(req, res)=>{
+    res.json({host:server.address().address,post:server.address().port})
+})
 app.ws('/upload', function (ws, req){
     ws.send("连接成功")
     ws.on('message', function (msg) {
     console.log(msg)
     })
 })
-
 var server=app.listen('3001',function(){
     var host = server.address().address;
     var port = server.address().port;
