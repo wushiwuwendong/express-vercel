@@ -95,12 +95,7 @@ app.get("/",(req, res)=>{
 app.get("/info",(req, res)=>{
     res.json({host:server.address().address,post:server.address().port})
 })
-app.ws('/upload', function (ws, req){
-    ws.send("连接成功")
-    ws.on('message', function (msg) {
-    console.log(msg)
-    })
-})
+
 var server=app.listen('3001',function(){
     var host = server.address().address;
     var port = server.address().port;
