@@ -14,7 +14,7 @@ const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
-
+var userinfo=require("./router/datastore").userinfo
 
 const Pusher = require("pusher");
 
@@ -26,9 +26,9 @@ const pusher = new Pusher({
   useTLS: true
 });
 
-pusher.trigger("my-channel", "my-event", {
+/*pusher.trigger("my-channel", "my-event", {
   message: "hello world"
-});
+});*/
 
 
 console.log(__dirname);
@@ -95,7 +95,26 @@ app.get("/",(req, res)=>{
 app.get("/info",(req, res)=>{
     res.json({host:server.address().address,post:server.address().port})
 })
-
+app.get("/list",(req, res)=>{
+    res.json({result:userinfo})
+})
+app.post("/pusher/user-auth", (req, res) => {
+    const socketId = req.body.socket_id;
+    const ipAddress = req.ip;
+  
+    // Replace this with code to retrieve the actual user id and info
+    const user = {
+      id: socketId,
+      user_info: {
+        name: "personal"+userinfo.length,
+      },
+      watchlist: ['another_id_1', 'another_id_2']
+    };
+    userinfo.push(user);
+    const authResponse = pusher.authenticateUser(socketId, user);
+    res.send(authResponse);
+  });
+  
 var server=app.listen('3001',function(){
     var host = server.address().address;
     var port = server.address().port;

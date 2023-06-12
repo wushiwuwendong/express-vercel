@@ -13,8 +13,10 @@ const skuList=[]
 const xm="";
 const wls=["YA813-8730","HSI-HXJ","CY-TBF","TA136-9195","TB136-9195"]
 const wlselect="000"
+const userinfo=[]
 module.exports = {
     baidutoken,
+    userinfo,
     zxd,
     zxdzz,
     skuListcancel,
