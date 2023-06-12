@@ -37,7 +37,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       }
       const response={}
       // 构造响应数据
-      try{
+   
          response = {
           status: 200,
           message: "收到图片",
@@ -49,19 +49,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
           table:JSON.parse(table)
   
         };
-      }catch{
-         response = {
-          status: 200,
-          message: "收到图片",
-          filename: originalname,
-          size: size,
-          path: path,
-          uplaodstatus:await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true),
-          baidutoken:baidutoken,
-          table:table
-  
-        };
-      }
+    
     
       res.json(response);
       // 将响应数据以 JSON 格式返回
@@ -77,9 +65,9 @@ function isJSON(variable) {
   if (typeof variable === 'string') {
     try {
       JSON.parse(variable);
-      return true; // 变量是JSON格式
+      return JSON.parse(variable); // 变量是JSON格式
     } catch (error) {
-      return false; // 变量是字符串
+      return variable; // 变量是字符串
     }
   } else {
     return false; // 变量不是字符串
