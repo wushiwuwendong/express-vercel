@@ -47,7 +47,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
           table:JSON.parse(table)
   
         };
-    
+        res.setHeader('Access-Control-Allow-Origin', '*');
     
       res.json(response);
       // 将响应数据以 JSON 格式返回
