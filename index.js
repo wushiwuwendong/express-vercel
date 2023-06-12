@@ -25,15 +25,13 @@ const pusher = new Pusher({
   cluster: "ap1",
   useTLS: true
 });
-// 订阅通道
-const channel = pusher.subscribe('my-channel');
-channel.bind('my-event', function(data) {
-    console.log('接收到通道数据:', data);
-    // 在这里处理接收到的数据
-  });
+
+pusher.trigger("my-channel", "my-event", {
+  message: "hello world"
+});
 
 
-
+console.log(__dirname);
 //中间件配置
 //适应Post请求
 app.use(EXPRESS.json())
