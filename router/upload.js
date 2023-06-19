@@ -36,7 +36,7 @@ function addToQueueAndAssignId(asyncFn) {
         console.log("currentId="+currentId)
         const resultrespne = await asyncFn;
         
-      console.log(result)
+      console.log(resultrespne)
      
       const resultt = results.filter((item) => {
         return item.id == id
