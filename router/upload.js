@@ -66,17 +66,15 @@ function addToQueueAndAssignId(asyncFn) {
           console.log("id="+id)
           console.log("currentId="+currentId)
    
-          const resultrespne = await sbtable(asyncFn,id);
-          
-        console.log(resultrespne)
-       
-        const resultt = results.filter((item) => {
-          return item.id == id
-          })
-        console.log("搜索结果"+resultt.length)
-        resultt["result"]=resultrespne
-          // 处理获得的结果
-          console.log("最终结果"+result);
+          sbtable(asyncFn, id)
+    .then(result => {
+      // 处理获得的结果
+      console.log(result);
+    })
+    .catch(error => {
+      // 处理错误
+      console.log(error);
+    });
         } catch (error) {
           // 处理错误
           console.log(error);
