@@ -31,7 +31,7 @@ function addToQueueAndAssignId(asyncFn) {
   results.push(result);
   queue.add(async function (id) {
       try {
-        const result = await asyncFn(s);
+        const result = await asyncFn;
         console.log("id="+id)
       console.log(resultttt)
      
