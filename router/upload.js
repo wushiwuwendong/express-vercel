@@ -27,7 +27,7 @@ const results = [];
 function addToQueueAndAssignId(asyncFn) {
   const result = {};
   const id = Date.now().toString(); // 生成唯一的 ID
-  queuee.add(asyncFn); // 将异步函数添加到队列
+  queue.add(function () {asyncFn}); // 将异步函数添加到队列
   result[id] = id; // 将 Promise 存储到结果对象中
   
   results.push(results);
