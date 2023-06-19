@@ -7,20 +7,35 @@ const crypto = require('crypto-js');
 var maxConcurrent = 4;
 var maxQueue = Infinity;
 var queue = new Queue(maxConcurrent,maxQueue);
+const token = 'ULRGZ30uR9r7F9r99ZZbL8rsf73j2g20';
 router.get("/wx",async function(req,res){
     //console.log(req.query['filename'])
     queue.add(function () {
    
-       
-            res.json({status: "200", message: 'ok'})
-            return
-        
+        const echoStr = req.query.echostr;
+        if (checkSignature(req.query)) {
+          res.send(echoStr);
+        } else {
+          res.send('');
+        }
 
     })
    
     
     
 })
+
+app.post('/wx', (req, res) => {
+    const xmlData = req.body;
+    const fromUsername = xmlData.FromUserName;
+    const toUsername = xmlData.ToUserName;
+    const keyword = xmlData.Content;
+  
+    const responseXml = generateResponseXml(fromUsername, toUsername, keyword);
+    res.set('Content-Type', 'text/xml');
+    res.send(responseXml);
+  });
+  
 function checkSignature(query) {
     const signature = query.signature;
     const timestamp = query.timestamp;
