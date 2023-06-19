@@ -30,7 +30,7 @@ function addToQueueAndAssignId(asyncFn) {
   result["id"] = id; // 将 Promise 存储到结果对象中
   results.push(result);
   queue.add(function (id) {
-    asyncFn
+    asyncFn()
     .then(resultttt => {
       // 在这里可以使用 result
       console.log("id="+id)
