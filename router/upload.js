@@ -70,7 +70,8 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       await hqtp();
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
-      var table=await sbtable(imggg);
+      //var table=await sbtable(imggg);
+      var table=addToQueueAndAssignId(sbtable(imggg));
       const xm = req.query.xm;
       const type = req.query.type;
       const id = req.query.id;
@@ -87,7 +88,8 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
           path: path,
           uplaodstatus:addToQueueAndAssignId(client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true)),
           baidutoken:baidutoken,
-          table:JSON.parse(table)
+          table:table
+          //table:JSON.parse(table)
   
         };
         res.setHeader('Access-Control-Allow-Origin', '*');
