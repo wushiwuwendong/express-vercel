@@ -33,11 +33,16 @@ function addToQueueAndAssignId(asyncFn) {
     asyncFn
     .then(resultttt => {
       // 在这里可以使用 result
+      console.log("id="+id)
+      console.log(resultttt)
+     
       const resultt = results.filter(item => item.id === id);
+      console.log(resultt)
       resultt["result"]=resultttt
     })
     .catch(error => {
       // 处理错误
+      console.log(error)
       const resultt = results.filter(item => item.id === id);
       resultt["result"]=error
     });
