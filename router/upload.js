@@ -35,7 +35,7 @@ function addToQueueAndAssignId(asyncFn) {
 }
 // 通过 ID 获取异步执行结果
 function getResultById(id) {
-  const resultt = array.filter(item => item.id === searchId);
+  const resultt = array.filter(item => item.id === id);
   if (resultt.length>0) {
     return resultt;
   }
