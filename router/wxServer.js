@@ -25,7 +25,7 @@ router.get("/wx",async function(req,res){
     
 })
 
-app.post('/wx', (req, res) => {
+router.post('/wx', (req, res) => {
     const xmlData = req.body;
     const fromUsername = xmlData.FromUserName;
     const toUsername = xmlData.ToUserName;
