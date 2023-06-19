@@ -27,20 +27,24 @@ const results = [];
 function addToQueueAndAssignId(asyncFn) {
   const result = {};
   const id = Date.now().toString(); // 生成唯一的 ID
-  queue.add(function () {
+  result["id"] = id; // 将 Promise 存储到结果对象中
+  results.push(result);
+  queue.add(function (id) {
     asyncFn
-    .then(result => {
+    .then(resultttt => {
       // 在这里可以使用 result
-      result["result"]=result
+      const resultt = results.filter(item => item.id === id);
+      resultt["result"]=resultttt
     })
     .catch(error => {
       // 处理错误
-      result["result"]=error
+      const resultt = results.filter(item => item.id === id);
+      resultt["result"]=error
     });
   }); // 将异步函数添加到队列
-  result["id"] = id; // 将 Promise 存储到结果对象中
+
   
-  results.push(result);
+
   console.log(results)
   return id; // 返回分配的 ID
 }
