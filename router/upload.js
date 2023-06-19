@@ -44,7 +44,7 @@ function addToQueueAndAssignId(asyncFn) {
       console.log("搜索结果"+resultt.length)
       resultt["result"]=resultrespne
         // 处理获得的结果
-        console.log(result);
+        console.log("最终结果"+result);
       } catch (error) {
         // 处理错误
         console.log(error);
