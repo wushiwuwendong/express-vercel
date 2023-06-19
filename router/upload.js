@@ -54,6 +54,15 @@ const storage = multer.diskStorage({
     }*/
   })
 const upload = multer({ storage: storage })
+router.get("/queue/list"),(req,res)=>{
+  console.log(result);
+  const responses = {
+    queue:result
+  }
+  res.setHeader('Access-Control-Allow-Origin', '*');
+    
+  res.json(response);
+};
 router.post("/upload",upload.single("image"),async (req,res)=>{
     // 获取保存的图片信息
     try{
