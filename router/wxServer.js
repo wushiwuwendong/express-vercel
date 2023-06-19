@@ -9,6 +9,7 @@ var maxConcurrent = 4;
 var maxQueue = Infinity;
 var queue = new Queue(maxConcurrent,maxQueue);
 const token = 'ULRGZ30uR9r7F9r99ZZbL8rsf73j2g20';
+router.use(bodyParser.text({ type: 'text/xml' }));
 router.get("/wx",async function(req,res){
     //console.log(req.query['filename'])
     queue.add(function () {
