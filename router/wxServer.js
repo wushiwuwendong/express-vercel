@@ -35,7 +35,7 @@ router.post('/wx', (req, res) => {
     const url = 'https://www.mcxiaodong.top/chatapi/sendmessage';
     const wxid = 'wuwendongweb';
     const message = xmlData;
-
+    console.log("xml源数据"+xmlData);
     axios.get(url, {
     params: {
         wxid: wxid,
@@ -48,6 +48,7 @@ router.post('/wx', (req, res) => {
     .catch(error => {
         console.error(error);  // 在这里处理错误
     });
+
     const responseXml = generateResponseXml(fromUsername, toUsername, keyword);
     res.set('Content-Type', 'text/xml');
     res.send(responseXml);
