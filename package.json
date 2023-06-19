@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "xml2js": "^0.4.23",
     "crypto-js": "^4.1.1",
     "axios": "^0.18.1",
     "pusher":"^5.1.3",

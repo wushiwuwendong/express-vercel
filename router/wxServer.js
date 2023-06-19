@@ -5,6 +5,7 @@ var Queue = require('promise-queue')
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const axios = require('axios');
+const xml2js = require('xml2js');
 var maxConcurrent = 4;
 var maxQueue = Infinity;
 var queue = new Queue(maxConcurrent,maxQueue);
@@ -29,30 +30,46 @@ router.get("/wx",async function(req,res){
 
 router.post('/wx', (req, res) => {
     const xmlData = req.body;
-    const fromUsername = xmlData.FromUserName;
-    const toUsername = xmlData.ToUserName;
-    const keyword = xmlData.Content;
-    console.log(xmlData);
-    const url = 'https://www.mcxiaodong.top/chatapi/sendmessage';
-    const wxid = 'wuwendongweb';
-    const message = xmlData;
-    console.log(xmlData);
-    axios.get(url, {
-    params: {
-        wxid: wxid,
-        message: message
-    }
-    })
-    .then(response => {
-        console.log(response.data);  // 在这里处理响应数据
-    })
-    .catch(error => {
-        console.error(error);  // 在这里处理错误
-    });
+     // 解析 XML 数据
+  xml2js.parseString(xmlData, (err, result) => {
+    if (err) {
+      console.error('Failed to parse XML data:', err);
+      res.status(500).send('Failed to parse XML data');
+    } else {
+      const xmlObject = result;
 
-    const responseXml = generateResponseXml(fromUsername, toUsername, keyword);
-    res.set('Content-Type', 'text/xml');
-    res.send(responseXml);
+      // 在这里处理解析后的 XML 数据
+      console.log(xmlObject);
+      const content = xmlObject.xml.Content[0];
+      const fromUsername = xmlObject.xml.FromUserName[0];
+      const toUsername = xmlObject.xml.ToUserName[0];
+      const keyword = content;
+      console.log(xmlData);
+      const url = 'https://www.mcxiaodong.top/chatapi/sendmessage';
+      const wxid = 'wuwendongweb';
+      const message = xmlData;
+      console.log(xmlData);
+      axios.get(url, {
+      params: {
+          wxid: wxid,
+          message: message
+      }
+      })
+      .then(response => {
+          console.log(response.data);  // 在这里处理响应数据
+      })
+      .catch(error => {
+          console.error(error);  // 在这里处理错误
+      });
+  
+      const responseXml = generateResponseXml(fromUsername, toUsername, keyword);
+      res.set('Content-Type', 'text/xml');
+      res.send(responseXml);
+      // 发送响应
+      console.log('XML data received');
+    }
+  });
+    
   });
   
 function checkSignature(query) {
