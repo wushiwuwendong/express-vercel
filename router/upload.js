@@ -31,9 +31,10 @@ function addToQueueAndAssignId(asyncFn) {
   results.push(result);
   queue.add(async function (id) {
       try {
-        const result = await asyncFn;
         console.log("id="+id)
-      console.log(resultttt)
+        const result = await asyncFn;
+        
+      console.log(result)
      
       const resultt = results.filter(item => item.id === id);
       console.log(resultt)
@@ -42,7 +43,7 @@ function addToQueueAndAssignId(asyncFn) {
         console.log(result);
       } catch (error) {
         // 处理错误
-        console.error(error);
+        console.log(error);
       }
     
     
