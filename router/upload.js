@@ -11,7 +11,35 @@ const client = createClient(
       password: "asd5201314",
     }
 );
+var Queue = require('promise-queue');
+const PromiseQueue = require('promise-queue');
 
+var maxConcurrent = 4;
+var maxQueue = Infinity;
+var queue = new Queue(maxConcurrent,maxQueue);
+
+// 创建 PromiseQueue 实例
+const queuee = new PromiseQueue();
+
+// 存储异步执行结果的对象
+const results = {};
+// 将异步函数添加到执行队列，并分配一个 ID
+function addToQueueAndAssignId(asyncFn) {
+  const id = Date.now().toString(); // 生成唯一的 ID
+  const promise = queue.add(asyncFn); // 将异步函数添加到队列
+  results[id] = promise; // 将 Promise 存储到结果对象中
+  return id; // 返回分配的 ID
+}
+// 通过 ID 获取异步执行结果
+function getResultById(id) {
+  if (results[id]) {
+    return results[id].then(result => {
+      delete results[id]; // 获取结果后删除存储的 Promise
+      return result;
+    });
+  }
+  return Promise.reject(new Error('Invalid Task ID'));
+}
 const storage = multer.diskStorage({
     //保存路径
    /* destination: function (req, file, cb) {
@@ -32,17 +60,21 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
       var table=await sbtable(imggg);
-   
+      const xm = req.query.xm;
+      const type = req.query.type;
+      const id = req.query.id;
     
       // 构造响应数据
-   
+     /* queue.add(function () {
+        await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true)
+      })*/
       const response = {
           status: 200,
           message: "收到图片2",
           filename: originalname,
           size: size,
           path: path,
-          uplaodstatus:await client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true),
+          uplaodstatus:addToQueueAndAssignId(client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true)),
           baidutoken:baidutoken,
           table:JSON.parse(table)
   
