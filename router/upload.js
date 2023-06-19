@@ -26,7 +26,7 @@ const results = {};
 // 将异步函数添加到执行队列，并分配一个 ID
 function addToQueueAndAssignId(asyncFn) {
   const id = Date.now().toString(); // 生成唯一的 ID
-  const promise = queue.add(asyncFn); // 将异步函数添加到队列
+  const promise = queuee.add(asyncFn); // 将异步函数添加到队列
   results[id] = promise; // 将 Promise 存储到结果对象中
   return id; // 返回分配的 ID
 }
