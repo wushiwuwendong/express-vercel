@@ -56,7 +56,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 router.get("/queue/list",async function(req,res){
   const responses = {
-    queue:result
+    queue:results
   }
   res.setHeader('Access-Control-Allow-Origin', '*');
     
