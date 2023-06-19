@@ -22,21 +22,22 @@ var queue = new Queue(maxConcurrent,maxQueue);
 const queuee = new PromiseQueue();
 
 // 存储异步执行结果的对象
-const results = {};
+const results = [];
 // 将异步函数添加到执行队列，并分配一个 ID
 function addToQueueAndAssignId(asyncFn) {
+  const result = {};
   const id = Date.now().toString(); // 生成唯一的 ID
   const promise = queuee.add(asyncFn); // 将异步函数添加到队列
-  results[id] = promise; // 将 Promise 存储到结果对象中
+  result[id] = id; // 将 Promise 存储到结果对象中
+  result[promise] = promise; // 将 Promise 存储到结果对象中
+  results.push(results);
   return id; // 返回分配的 ID
 }
 // 通过 ID 获取异步执行结果
 function getResultById(id) {
-  if (results[id]) {
-    return results[id].then(result => {
-      delete results[id]; // 获取结果后删除存储的 Promise
-      return result;
-    });
+  const resultt = array.filter(item => item.id === searchId);
+  if (resultt.length>0) {
+    return resultt;
   }
   return Promise.reject(new Error('Invalid Task ID'));
 }
