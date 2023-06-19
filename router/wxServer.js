@@ -30,7 +30,7 @@ router.post('/wx', (req, res) => {
     const fromUsername = xmlData.FromUserName;
     const toUsername = xmlData.ToUserName;
     const keyword = xmlData.Content;
-  
+    console.log(xmlData);
     const responseXml = generateResponseXml(fromUsername, toUsername, keyword);
     res.set('Content-Type', 'text/xml');
     res.send(responseXml);
@@ -52,7 +52,7 @@ function checkSignature(query) {
   function generateResponseXml(fromUsername, toUsername, keyword) {
     let responseContent;
     let responseMsgType;
-  
+    console.log("关键词"+keyword)
     if (keyword === '验证码') {
       responseContent = `您的验证码为: ${generateCode()}`;
       responseMsgType = 'text';
