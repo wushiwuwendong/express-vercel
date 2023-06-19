@@ -34,6 +34,7 @@ function addToQueueAndAssignId(asyncFn) {
       try {
         console.log("id="+id)
         console.log("currentId="+currentId)
+ 
         const resultrespne = await asyncFn;
         
       console.log(resultrespne)
@@ -52,8 +53,37 @@ function addToQueueAndAssignId(asyncFn) {
     
     
   }); // 将异步函数添加到队列
+}
 
-  
+  function addToQueueSbtable(asyncFn) {
+    const result = {};
+    const id = Date.now().toString(); // 生成唯一的 ID
+    result["id"] = id; // 将 Promise 存储到结果对象中
+    results.push(result);
+    queue.add(async function () {
+      const currentId = id; // 将 id 保存到一个新的变量中
+        try {
+          console.log("id="+id)
+          console.log("currentId="+currentId)
+   
+          const resultrespne = await sbtable(asyncFn,id);
+          
+        console.log(resultrespne)
+       
+        const resultt = results.filter((item) => {
+          return item.id == id
+          })
+        console.log("搜索结果"+resultt.length)
+        resultt["result"]=resultrespne
+          // 处理获得的结果
+          console.log("最终结果"+result);
+        } catch (error) {
+          // 处理错误
+          console.log(error);
+        }
+      
+      
+    }); // 将异步函数添加到队列
 
   console.log(results)
   return id; // 返回分配的 ID
@@ -95,7 +125,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
       //var table=await sbtable(imggg);
-      var table=addToQueueAndAssignId(sbtable(imggg));
+      var table=addToQueueSbtable(imggg);
       const xm = req.query.xm;
       const type = req.query.type;
       const id = req.query.id;
@@ -161,7 +191,7 @@ function hqtp() {
     );
   });
 }
-function sbtable(s) {
+function sbtable(s,id) {
   var request = require('request');
   let options = {
       url: "https://aip.baidubce.com/rest/2.0/ocr/v1/table?access_token="+baidutoken,
@@ -174,6 +204,11 @@ function sbtable(s) {
           if (error) {
               reject(error);
           } else {
+            const resultt = results.filter((item) => {
+              return item.id == id
+              })
+            console.log("搜索结果"+resultt.length)
+            resultt["result"]=resultrespne
               resolve(body);
           }
       });
