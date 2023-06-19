@@ -13,7 +13,8 @@ const image=require("./router/image")
 const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
-const Upload=require("./router/upload")
+const Upload=require("./router/upload");
+const WxServer=require("./router/wxServer");
 const bodyParser = require('body-parser');
 const crypto = require('crypto-js');
 var userinfo=require("./router/datastore").userinfo
@@ -63,6 +64,7 @@ app.use("/",Login)
 app.use("/",Download)
 app.use("/",Depend)
 app.use("/",Upload)
+app.use("/",WxServer)
 // 全局错误处理中间件
 app.use((err, req, res, next) => {
     // 设置错误状态码，默认为 500 内部服务器错误
