@@ -49,19 +49,6 @@ router.post('/wx', (req, res) => {
       const wxid = 'wuwendongweb';
       const message = xmlData;
       console.log(xmlData);
-      axios.get(url, {
-      params: {
-          wxid: wxid,
-          message: message
-      }
-      })
-      .then(response => {
-          console.log(response.data);  // 在这里处理响应数据
-      })
-      .catch(error => {
-          console.error(error);  // 在这里处理错误
-      });
-  
       const responseXml = generateResponseXml(fromUsername, toUsername, keyword);
       res.set('Content-Type', 'text/xml');
       res.send(responseXml);
