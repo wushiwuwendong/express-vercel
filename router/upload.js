@@ -55,6 +55,7 @@ const storage = multer.diskStorage({
   })
 const upload = multer({ storage: storage })
 router.get("/queue/list",async function(req,res){
+  console.log(results);
   const responses = {
     queue:results
   }
