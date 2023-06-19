@@ -27,7 +27,7 @@ const results = [];
 function addToQueueAndAssignId(asyncFn) {
   const result = {};
   const id = Date.now().toString(); // 生成唯一的 ID
-  queue.add(function () {asyncFn}); // 将异步函数添加到队列
+  result[result]=queue.add(function () {asyncFn}); // 将异步函数添加到队列
   result[id] = id; // 将 Promise 存储到结果对象中
   
   results.push(results);
@@ -77,6 +77,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
           path: path,
           uplaodstatus:addToQueueAndAssignId(client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true)),
           baidutoken:baidutoken,
+          queue:results,
           table:JSON.parse(table)
   
         };
