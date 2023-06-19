@@ -29,23 +29,23 @@ function addToQueueAndAssignId(asyncFn) {
   const id = Date.now().toString(); // 生成唯一的 ID
   result["id"] = id; // 将 Promise 存储到结果对象中
   results.push(result);
-  queue.add(function (id) {
-    asyncFn
-    .then(resultttt => {
-      // 在这里可以使用 result
-      console.log("id="+id)
+  queue.add(async function (id) {
+      try {
+        const result = await asyncFn(s);
+        console.log("id="+id)
       console.log(resultttt)
      
       const resultt = results.filter(item => item.id === id);
       console.log(resultt)
-      resultt["result"]=resultttt
-    })
-    .catch(error => {
-      // 处理错误
-      console.log(error)
-      const resultt = results.filter(item => item.id === id);
-      resultt["result"]=error
-    });
+      resultt["result"]=result
+        // 处理获得的结果
+        console.log(result);
+      } catch (error) {
+        // 处理错误
+        console.error(error);
+      }
+    
+    
   }); // 将异步函数添加到队列
 
   
