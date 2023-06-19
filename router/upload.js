@@ -34,7 +34,7 @@ function addToQueueAndAssignId(asyncFn) {
       try {
         console.log("id="+id)
         console.log("currentId="+currentId)
-        const result = await asyncFn;
+        const resultrespne = await asyncFn;
         
       console.log(result)
      
@@ -42,7 +42,7 @@ function addToQueueAndAssignId(asyncFn) {
         return item.id == id
         })
       console.log("搜索结果"+resultt.length)
-      resultt["result"]=result
+      resultt["result"]=resultrespne
         // 处理获得的结果
         console.log(result);
       } catch (error) {
