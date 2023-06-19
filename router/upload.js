@@ -29,9 +29,11 @@ function addToQueueAndAssignId(asyncFn) {
   const id = Date.now().toString(); // 生成唯一的 ID
   result["id"] = id; // 将 Promise 存储到结果对象中
   results.push(result);
-  queue.add(async function (id) {
+  queue.add(async function () {
+    const currentId = id; // 将 id 保存到一个新的变量中
       try {
         console.log("id="+id)
+        console.log("currentId="+currentId)
         const result = await asyncFn;
         
       console.log(result)
