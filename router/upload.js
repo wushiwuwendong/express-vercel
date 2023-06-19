@@ -30,7 +30,7 @@ function addToQueueAndAssignId(asyncFn) {
   result["id"] = id; // 将 Promise 存储到结果对象中
   results.push(result);
   queue.add(function (id) {
-    asyncFn()
+    asyncFn
     .then(resultttt => {
       // 在这里可以使用 result
       console.log("id="+id)
@@ -163,6 +163,7 @@ function sbtable(s) {
       form:{image:s},
   };
   //console.log(options);
+  console.log("识别表格")
   return new Promise(function (resolve, reject) {
       request.post(options, function (error, response, body) {
           if (error) {
