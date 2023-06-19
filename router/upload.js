@@ -39,7 +39,7 @@ function addToQueueAndAssignId(asyncFn) {
       console.log(result)
      
       const resultt = results.filter(item => item.id === id);
-      console.log(resultt)
+      console.log("搜索结果"+resultt.length)
       resultt["result"]=result
         // 处理获得的结果
         console.log(result);
