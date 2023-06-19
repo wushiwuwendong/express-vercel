@@ -14,10 +14,12 @@ const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload")
+const bodyParser = require('body-parser');
+const crypto = require('crypto-js');
 var userinfo=require("./router/datastore").userinfo
 
 const Pusher = require("pusher");
-
+const token = 'ULRGZ30uR9r7F9r99ZZbL8rsf73j2g20';
 const pusher = new Pusher({
   appId: "1616885",
   key: "82c3a115672d9387be63",
