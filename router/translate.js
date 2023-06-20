@@ -15,9 +15,20 @@ router.get("/translate",async function(req,res){
     try{
         const message = req.query.message;
         const type = req.query.type;
-        const response={
-            result:await fanyi3(message)
+        if(type=="GoogleTranslateV3"){
+            const response={
+                result:await fanyi3(message)
+            }
+        }else if(type=="GoogleTranslateV2"){
+            const response={
+                result:await fanyi2(message)
+            }
+        }else{
+            const response={
+                result:"参数不对"
+            }
         }
+       
         res.setHeader('Access-Control-Allow-Origin', '*');
         
         res.json(response);
@@ -26,6 +37,29 @@ router.get("/translate",async function(req,res){
         res.status(500).json({ error: error.message });
     }
     })
+    async function fanyi2(s) {
+        const url = `https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=en&tl=zh-CN&q=${encodeURIComponent(s)}`;
+        
+        const headers = {
+          'Cookie': 'NID=511=qWIAznTALWBCMobQTETiZSMZXLHfNj65jRgBN0Zkgj2zLQzuFY0b74kWqTaQSESm2J3c-ZZNe1orr9e5aaaCtlnQPad0amHVqmk31XykOvJ8WLOCRj6dy8ICGG5e_zs24fwwJlEffHi0vdhSmJHizZ73i5UTz-w5BPGHSnlQaZM'
+        };
+        
+        try {
+          const response = await axios.post(url, {}, { headers });
+          console.log(response.data);
+          try {
+            console.log(response.data[0]);
+            return response.data[0];
+          } catch (error) {
+            console.error("出错");
+            return "翻译出错，请按ALT + T还原原文";
+          }
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+      }
+
 async function fanyi3(s) {
     reqid += 10;
     const url = `https://translate.google.com.hk/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&source-path=/&f.sid=${sid}&bl=boq_translate-webserver_20230201.07_p0&hl=zh-CN&soc-app=1&soc-platform=1&soc-device=1&_reqid=${reqid}&rt=c`;
