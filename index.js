@@ -13,7 +13,7 @@ const image=require("./router/image")
 const Login=require("./router/login")
 const Download=require("./router/download")
 const Depend=require("./router/dependencies")
-const Upload=require("./router/upload");
+//const Upload=require("./router/upload");
 const WxServer=require("./router/wxServer");
 
 var userinfo=require("./router/datastore").userinfo
@@ -62,7 +62,7 @@ app.use("/",image)
 app.use("/",Login)
 app.use("/",Download)
 app.use("/",Depend)
-app.use("/",Upload)
+//app.use("/",Upload)
 app.use("/",WxServer)
 // 全局错误处理中间件
 app.use((err, req, res, next) => {
