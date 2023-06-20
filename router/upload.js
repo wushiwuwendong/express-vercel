@@ -122,7 +122,7 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       await hqtp();
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
-      var table=await sbtable(imggg);
+      var table=await sbtable(imggg,123);
      // var table=addToQueueSbtable(imggg);
       const xm = req.query.xm;
       const type = req.query.type;
@@ -202,11 +202,7 @@ function sbtable(s,id) {
           if (error) {
               reject(error);
           } else {
-            const resultt = results.filter((item) => {
-              return item.id == id
-              })
-            console.log("搜索结果"+resultt.length)
-            resultt["result"]=resultrespne
+           
               resolve(body);
           }
       });
