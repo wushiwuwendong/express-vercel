@@ -122,8 +122,8 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
       await hqtp();
       var files = fs.readFileSync(path);
       var imggg=new Buffer(files).toString('base64');
-      //var table=await sbtable(imggg);
-      var table=addToQueueSbtable(imggg);
+      var table=await sbtable(imggg);
+     // var table=addToQueueSbtable(imggg);
       const xm = req.query.xm;
       const type = req.query.type;
       const id = req.query.id;
