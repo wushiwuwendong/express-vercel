@@ -4,13 +4,14 @@ const multer = require('multer')
 var baidutoken = require("./datastore").baidutoken;
 
 /*-------------------*/
-
+const {Base64}= require('js-base64')
 var JsBarcode = require('jsbarcode');
-
+const JSZIP = require('jszip')
 
 const Enumerable=require('linq')
-
-
+const { jsPDF } = require("jspdf"); // will automatically load the node versionconst 
+require("jspdf-autotable")
+var addfont222 =require('../fonts/font')
 /*-------------------*/
 
 var fs = require('fs');//引用文件系统模块
