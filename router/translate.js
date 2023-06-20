@@ -46,8 +46,8 @@ async function fanyi3(s) {
   
     try {
       const response = await axios.post(url, payload, { headers });
-      console.log(response.data);
-      return response.data;
+      console.log(response.body);
+      return response.body;
     } catch (error) {
       console.error(error);
       return null;
