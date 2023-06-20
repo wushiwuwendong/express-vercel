@@ -15,8 +15,7 @@ const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload");
 const WxServer=require("./router/wxServer");
-const bodyParser = require('body-parser');
-const crypto = require('crypto-js');
+
 var userinfo=require("./router/datastore").userinfo
 
 const Pusher = require("pusher");
