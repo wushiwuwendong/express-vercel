@@ -7,7 +7,7 @@ var baidutoken = require("./datastore").baidutoken;
 
 var JsBarcode = require('jsbarcode');
 
-var { createCanvas } = require("canvas");
+
 const Enumerable=require('linq')
 
 
