@@ -29,10 +29,10 @@ router.get("/translate",async function(req,res){
 async function fanyi3(s) {
     reqid += 10;
     const url = `https://translate.google.com.hk/_/TranslateWebserverUi/data/batchexecute?rpcids=MkEWBc&source-path=/&f.sid=${sid}&bl=boq_translate-webserver_20230201.07_p0&hl=zh-CN&soc-app=1&soc-platform=1&soc-device=1&_reqid=${reqid}&rt=c`;
-    console.log(url);
+    //console.log(url);
     
     const payload = `f.req=${encodeURIComponent('[[["MkEWBc","[["' + s + '", "auto", "zh-CN", true],[null]]",null,"generic"]]]')}&`;
-    console.log(payload);
+    //console.log(payload);
     
     const headers = {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0',
