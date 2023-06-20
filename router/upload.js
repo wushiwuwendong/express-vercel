@@ -10,8 +10,7 @@ const JSZIP = require('jszip')
 var { createCanvas } = require("canvas");
 const Enumerable=require('linq')
 const { jsPDF } = require("jspdf"); // will automatically load the node versionconst 
-require("jspdf-autotable")
-var addfont222 =require('../fonts/font')
+
 /*-------------------*/
 
 var fs = require('fs');//引用文件系统模块
