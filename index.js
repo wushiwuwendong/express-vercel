@@ -15,6 +15,7 @@ const Download=require("./router/download")
 const Depend=require("./router/dependencies")
 const Upload=require("./router/upload");
 const WxServer=require("./router/wxServer");
+const Translate=require("./router/translate");
 
 var userinfo=require("./router/datastore").userinfo
 
@@ -64,6 +65,7 @@ app.use("/",Download)
 app.use("/",Depend)
 app.use("/",Upload)
 app.use("/",WxServer)
+app.use("/",Translate)
 // 全局错误处理中间件
 app.use((err, req, res, next) => {
     // 设置错误状态码，默认为 500 内部服务器错误
