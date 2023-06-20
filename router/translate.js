@@ -15,16 +15,17 @@ router.get("/translate",async function(req,res){
     try{
         const message = req.query.message;
         const type = req.query.type;
+        const response={}
         if(type=="GoogleTranslateV3"){
-            const response={
+             response={
                 result:await fanyi3(message)
             }
         }else if(type=="GoogleTranslateV2"){
-            const response={
+             response={
                 result:await fanyi2(message)
             }
         }else{
-            const response={
+             response={
                 result:"参数不对"
             }
         }
