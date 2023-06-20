@@ -7,7 +7,7 @@ var baidutoken = require("./datastore").baidutoken;
 const {Base64}= require('js-base64')
 var JsBarcode = require('jsbarcode');
 const JSZIP = require('jszip')
-var { createCanvas } = require("canvas");
+//var { createCanvas } = require("canvas");
 const Enumerable=require('linq')
 const { jsPDF } = require("jspdf"); // will automatically load the node versionconst 
 require("jspdf-autotable")
