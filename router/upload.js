@@ -2,6 +2,18 @@ const EXPRESS=require('express')
 const router=EXPRESS.Router()
 const multer = require('multer')
 var baidutoken = require("./datastore").baidutoken;
+
+/*-------------------*/
+const {Base64}= require('js-base64')
+var JsBarcode = require('jsbarcode');
+const JSZIP = require('jszip')
+var { createCanvas } = require("canvas");
+const Enumerable=require('linq')
+const { jsPDF } = require("jspdf"); // will automatically load the node versionconst 
+require("jspdf-autotable")
+var addfont222 =require('../fonts/font')
+/*-------------------*/
+
 var fs = require('fs');//引用文件系统模块
 const { createClient } = require("webdav");
 const client = createClient(
@@ -140,8 +152,8 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
           path: path,
           uplaodstatus:addToQueueAndAssignId(client.putFileContents("/ghost/hxj/upload/"+originalname, fs.readFileSync(path),true)),
           baidutoken:baidutoken,
-          table:table
-          //table:JSON.parse(table)
+          //table:table
+          table:JSON.parse(table)
   
         };
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -155,7 +167,17 @@ router.post("/upload",upload.single("image"),async (req,res)=>{
   
  
 })
-
+router.post("/api/normal",upload.single("image"),async (req,res)=>{
+  const { originalname,filename, size, path } = req.file;
+  await hqtp();
+  var files = fs.readFileSync(path);
+  var imggg=new Buffer(files).toString('base64');
+  var table=await sbtable(imggg,123);
+ // var table=addToQueueSbtable(imggg);
+  const xm = req.query.xm;
+  const type = req.query.type;
+  const id = req.query.id;
+})
 function isJSON(variable) {
   if (typeof variable === 'string') {
     try {
