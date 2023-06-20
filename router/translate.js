@@ -15,24 +15,30 @@ router.get("/translate",async function(req,res){
     try{
         const message = req.query.message;
         const type = req.query.type;
-        const response={}
+
         if(type=="GoogleTranslateV3"){
-             response={
+            const response={
                 result:await fanyi3(message)
             }
+            res.setHeader('Access-Control-Allow-Origin', '*');
+        
+            res.json(response);
         }else if(type=="GoogleTranslateV2"){
-             response={
+            const response={
                 result:await fanyi2(message)
             }
+            res.setHeader('Access-Control-Allow-Origin', '*');
+        
+            res.json(response);
         }else{
-             response={
+            const response={
                 result:"参数不对"
             }
-        }
-       
-        res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Origin', '*');
         
-        res.json(response);
+            res.json(response);
+        }
+
     } catch (error) {
         // 错误处理逻辑
         res.status(500).json({ error: error.message });
